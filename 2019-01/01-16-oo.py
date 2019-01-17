@@ -1,5 +1,16 @@
 # encoding: utf-8
 
+'''
+
+    本节练习：面向对象基础
+
+            类的创建
+            类的实例化
+            类成员：成员变量、成员方法（类方法、实例方法、静态方法）
+
+'''
+
+
 
 class Group:
     total = 0
@@ -15,6 +26,7 @@ class Group:
         self.lastName = lastName
         self.sex = sex
 
+    # todo 实例方法，必须以self作为第一个参数，指向实例出来的对象，类调用报错，仅能实例调用。
     def fullName(self):
 
         return '{} {}'.format(self.firstName, self.lastName)
@@ -31,9 +43,9 @@ class Group:
 
     # todo 类方法，实例和类都可以访问，若去掉@classmethod装饰器则为实例方法，类调用会报错
     @classmethod
-    def members_total(self):
+    def members_total(cls):
 
-        return self.total
+        return cls.total
 
     # todo 静态方法，实例和类都可以访问，无需传self或者cls
     @staticmethod
@@ -43,7 +55,7 @@ class Group:
         else:
             return True
 
-
+# todo 实例化对象
 member_01 = Group('张', '三', '男')
 
 print(Group.members_total())  # 1   total为类成员变量，类和实例都可以访问，在构造器中设置计数，每实例化一个对象计数+1
@@ -88,13 +100,13 @@ class sub_Group(Group):
             self.members = members
 
     def get_members(self):
+        arr = []
         for item in self.members:
-            return item.fullName
-
-sub_Group_01 = sub_Group('aa','aa01','男')
-print(sub_Group_01.fullName())
+            arr.append(item.fullName())
+        return arr
 
 person1 = Group('bb','bb01','女')
 person2 = Group('cc','cc01','男')
 sub_Group_02 = sub_Group('aa','aa01','男',[person1,person2])
-print(sub_Group_02.get_members())
+
+print(sub_Group_02.get_members())   # ['bb bb01', 'cc cc01']
