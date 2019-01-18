@@ -84,8 +84,7 @@ member_02.belone = 2
 print(member_01.group_belone())  # 1
 print(member_02.group_belone())  # 2   belone为类成员变量，类和实例都可以访问
 
-member_03 = Group('', '', '').set_member_from_str('王-五-男')
-print(dir(member_03))
+member_03 = Group.set_member_from_str('王-五-男')
 print(member_03.fullName())
 print(member_03.sex)
 
