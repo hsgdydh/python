@@ -8,16 +8,25 @@
             类的实例化
             类成员：成员变量、成员方法（类方法、实例方法、静态方法）
 
+            1. 构造器，每次生成实例都会调用。
+            2. 类变量，类和实例都可以访问和修改，使用类修改则以该类为基类的所有实例都相应改变，若使用实例修改，则仅对于当前实例修改。
+            3. 实例变量，仅实例可访问
+            2. 实例方法，必须以self作为第一个参数，指向实例出来的对象，类调用报错，仅能实例调用。
+            3. 类方法，采用 @classmethod 装饰器，以 cls 作为第一个参数，实例和类都可以访问，类调用会报错。
+            4. 静态方法，采用 @staticmethod 装饰器，无需传self或者cls，实例和类都可以访问。
+
 '''
 
 
 
 class Group:
+
+    # 类变量
     total = 0
     belone = 1
 
     # todo 构造器，每次生成实例都会调用
-    def __init__(self, firstName, lastName, sex):
+    def __init__(self, firstName, lastName, sex):   # 实例变量
 
         # todo 在构造器中修改类成员变量的值，计数实例化多少个对象
         Group.total += 1
@@ -41,7 +50,7 @@ class Group:
         (firstName, lastName, sex) = str.split('-')
         return cls(firstName, lastName, sex)
 
-    # todo 类方法，实例和类都可以访问，若去掉@classmethod装饰器则为实例方法，类调用会报错
+    # todo 类方法，实例和类都可以访问，cls作为第一个参数
     @classmethod
     def members_total(cls):
 
@@ -58,6 +67,7 @@ class Group:
 # todo 实例化对象
 member_01 = Group('张', '三', '男')
 
+# print(Group.firstName)   # 报错，实例变量只能实例访问
 print(Group.members_total())  # 1   total为类成员变量，类和实例都可以访问，在构造器中设置计数，每实例化一个对象计数+1
 
 member_02 = Group('李', '四', '女')
